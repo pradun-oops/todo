@@ -31,15 +31,7 @@ class DbHelper {
       dbPath,
       version: 1,
       onCreate: (db, version) {
-        db.execute('''
-          CREATE TABLE $TODO_TABLE (
-            $TODO_TABLE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-            $TODO_TITLE TEXT,
-            $TODO_DESCRIPTION TEXT,
-            $TODO_CREATED_AT TEXT,
-            $TODO_COMPLETED INTEGER,
-          )
-        ''');
+                db.execute( "CREATE TABLE $TODO_TABLE ($TODO_TABLE_ID INTEGER PRIMARY KEY AUTOINCREMENT,$TODO_TITLE TEXT,$TODO_DESCRIPTION TEXT,$TODO_CREATED_AT TEXT,$TODO_COMPLETED INTEGER)");
       },
     );
   }
@@ -84,11 +76,11 @@ class DbHelper {
     return rowsEffected > 0;
   }
 
-  Future<bool> completedTask(int id) async {
+  Future<bool> completedTask(int id , bool value) async {
     var db = await getDB();
     int rowsEffected = await db.update(
       TODO_TABLE,
-      {TODO_COMPLETED: false},
+      {TODO_COMPLETED: value ? 1 : 0},
       where: "$TODO_TABLE_ID = ?",
       whereArgs: [id],
     );

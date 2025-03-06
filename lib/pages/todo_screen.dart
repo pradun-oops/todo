@@ -71,7 +71,9 @@ class _TodoListState extends State<TodoScreen> {
                             text: mData[index].description,
                             size: 18,
                           ),
-
+                          trailing: Checkbox(value: mData[index].completed ?? false, onChanged: (bool ? value){
+                            context.read<TodoCubit>().completed(id: mData[index].id!, value: value?? false);
+                          } , activeColor: Colors.white,checkColor: Colors.black,),
                           onLongPress: () {
                             showBottomSheet(
                               backgroundColor: Colors.white,

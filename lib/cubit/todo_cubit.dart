@@ -29,8 +29,8 @@ class TodoCubit extends Cubit<TodoState> {
     }
   }
 
-  void completed(int id) async {
-    bool check = await dbHelper.completedTask(id);
+  void completed({ required int id ,required bool value}) async {
+    bool check = await dbHelper.completedTask(id , value);
     if (check) {
       List<ToDoModel> todos = await dbHelper.fetchAllToDo();
       emit(TodoState(mData: todos));

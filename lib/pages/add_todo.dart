@@ -63,6 +63,7 @@ class _AddTodoState extends State<AddTodo> {
                             createdAt:
                                 DateTime.now().microsecondsSinceEpoch
                                     .toString(),
+                            completed: false,
                           ),
                         );
                         Navigator.pop(context);
